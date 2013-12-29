@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<title> Idea Machine </title>
+		<h1> Idea Machine </h1>	
+	</head>
+	<body>
+		<div>
+			%= form_for idea => begin
+			<p1> Idea Title </p1><br>
+			%= text_field 'title'
+			<br>
+			<p1> Idea Description </p1><br>
+			%= text_area 'description'
+			%= submit_button
+			<br>
+			% end
+		</div>
+	</body>
+</html>

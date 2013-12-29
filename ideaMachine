@@ -1,0 +1,18 @@
+#!/usr/bin/env perl
+use Mojolicious::Lite;
+use DBI;
+my $user = "lab";
+my $pass = "goMOJO";
+
+# CREATE database Idea;
+my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
+helper db => sub { $dbh };
+
+get '/' => sub {
+  my $self = shift;
+  $self->render('index');
+};
+
+
+
+app->start;
