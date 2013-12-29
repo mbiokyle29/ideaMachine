@@ -5,7 +5,6 @@ my $user = "ideaMac";
 my $pass = "deusXmach";
 
 my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
-helper db => sub { $dbh };
 
 get '/' => sub {
   my $self = shift;
@@ -17,8 +16,8 @@ get '/idea' => sub {
 	my $idea = $self->param('title');
 	my $desc = $self-> param('description');
 	my $submitter = $self->param('user');
-	$self->render(text =>  "$idea $desc $submitter");
-
+	my $id = insert_idea($idea, $desc, $submitter);
+	$self->render(text => "$id inserted");
 };
 
 sub insert_idea
@@ -26,6 +25,10 @@ sub insert_idea
 	my $title = shift;
 	my $description = shift;
 	my $user = shift;
-};
+	my $q = "INSERT INTO ideas (title, description, user) values (?,?,?)";
+	my $sth = $dbh->prepare($q);
+	$sth->execute($title, $description, $user);
+	return $dbh->{'mysql_insertid'};
+}
 
 app->start;
