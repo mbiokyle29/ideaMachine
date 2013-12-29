@@ -1,0 +1,16 @@
+$ curl get.mojolicio.us | sh
+# Mysql set up
+# CREATE USER 'ideaMac'@'localhost' IDENTIFIED BY 'deusXmach'
+# CREATE database Idea;
+# CREATE TABLE ideas
+#(
+#	id int auto_increment,
+#	primary key(id),
+#	title varchar(250),
+#	description text,
+#	user varchar(250),
+#); 
+# GRANT ALL ON Idea.* to 'ideaMac'@'localhost'
+
+cd to the dir with IdeaMachine
+$ morbo IdeaMachine

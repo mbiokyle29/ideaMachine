@@ -1,18 +1,8 @@
 #!/usr/bin/env perl
 use Mojolicious::Lite;
 use DBI;
-my $user = "lab";
-my $pass = "goMOJO";
-
-# CREATE database Idea;
-# CREATE TABLE ideas
-#(
-#	id int auto_increment,
-#	primary key(id),
-#	title varchar(250),
-#	description text,
-#	user varchar(250),
-#); 
+my $user = "ideaMac";
+my $pass = "deusXmach";
 
 my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
 helper db => sub { $dbh };
@@ -28,6 +18,14 @@ get '/idea' => sub {
 	my $desc = $self-> param('description');
 	my $submitter = $self->param('user');
 	$self->render(text =>  "$idea $desc $submitter");
+
+};
+
+sub insert_idea
+{
+	my $title = shift;
+	my $description = shift;
+	my $user = shift;
 };
 
 app->start;
