@@ -11,8 +11,10 @@
 			<br>
 			<p1> Idea Description </p1><br>
 			%= text_area 'description'
-			%= submit_button
 			<br>
+			<p1> Submitter <p1><br>
+			%= text_field 'user'
+			%= submit_button
 			% end
 		</div>
 	</body>
