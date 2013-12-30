@@ -17,5 +17,10 @@
 			%= submit_button
 			% end
 		</div>
+		<br><br>
+		<div>
+			<h1> Newly Added Ideas </h1>
+			<%  %>
+		</div>
 	</body>
 </html>

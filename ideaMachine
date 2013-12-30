@@ -8,6 +8,8 @@ my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
 
 get '/' => sub {
   my $self = shift;
+  my $ref = %select_idea;
+  $self->stash(ideas => $ref);
   $self->render('index');
 };
 
@@ -29,6 +31,15 @@ sub insert_idea
 	my $sth = $dbh->prepare($q);
 	$sth->execute($title, $description, $user);
 	return $dbh->{'mysql_insertid'};
+}
+
+sub select_idea
+{
+	my $q = "SELECT title, description, user from ideas LIMIT 10";
+	my $sth = $dbh->prepare($q);
+	$sth->execute();
+	my $arr_ref = $sth->fetchall_arrayref;
+	return $arr_ref;
 }
 
 app->start;
