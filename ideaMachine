@@ -8,24 +8,26 @@ my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
 
 get '/' => sub {
 	my $self = shift;
-	my $ref = &select_idea;
+	my $ref = &select_ideas;
 	$self->stash(ideas => $ref);
 	$self->render('index');
-	#my $stuff;
-	##foreach my $line (@ref)
-	#{
-	#	$stuff .= $line;
-	#}
-	#$self->render(text => "$stuff");
 };
 
-get '/idea' => sub {
+post '/idea' => sub {
 	my $self = shift;
 	my $idea = $self->param('title');
 	my $desc = $self-> param('description');
 	my $submitter = $self->param('user');
 	my $id = insert_idea($idea, $desc, $submitter);
-	$self->render(text => "$id inserted");
+	$self->redirect_to("/idea/$id");
+};
+
+get '/idea/:id/' => sub {
+	my $self = shift;
+	my $id = $self->param('id');
+	my $idea = &select_idea($id);
+	$self->stash(idea => $idea);
+	$self->render('idea');
 };
 
 sub insert_idea
@@ -39,7 +41,7 @@ sub insert_idea
 	return $dbh->{'mysql_insertid'};
 }
 
-sub select_idea
+sub select_ideas
 {
 	my $q = "SELECT title, description, user from ideas LIMIT 10";
 	my $sth = $dbh->prepare($q);
@@ -48,4 +50,13 @@ sub select_idea
 	return $arr_ref;
 }
 
+sub select_idea
+{
+	my $id = shift;
+	my $q = "SELECT title, description, user from ideas WHERE id=?";
+	my $sth = $dbh->prepare($q);
+	$sth->execute($id);
+	my $arr_ref = $sth->fetchrow_arrayref;
+	return $arr_ref;
+}
 app->start;
