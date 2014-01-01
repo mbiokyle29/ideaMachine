@@ -5,7 +5,7 @@
 	</head>
 	<body>
 		<div>
-			%= form_for idea => begin
+			%= form_for '/idea' => (method => 'POST') => begin
 			<p1> Idea Title </p1><br>
 			%= text_field 'title'
 			<br>
@@ -23,7 +23,6 @@
  			<% for my $row ( @{$ideas} ) { %>
  				<li> <%=$row->[0]%> <%=$row->[1]%> <%=$row->[2]%></li>
  				<br>
- 			<% } %>
- 			
+ 			<% } %>	
 	</body>
 </html>
