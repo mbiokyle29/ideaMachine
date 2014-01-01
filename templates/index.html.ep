@@ -20,8 +20,10 @@
 		<br><br>
 		<div>
 			<h1> Newly Added Ideas </h1>
-			<% foreach my $row (@{$ideas}) %>
-			<% foreach my $idea (@{$row})
-		</div>
+ 			<% for my $row ( @{$ideas} ) { %>
+ 				<li> <%=$row->[0]%> <%=$row->[1]%> <%=$row->[2]%></li>
+ 				<br>
+ 			<% } %>
+ 			
 	</body>
 </html>
