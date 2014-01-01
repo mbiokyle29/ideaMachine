@@ -8,7 +8,7 @@ my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
 
 get '/' => sub {
   my $self = shift;
-  my $ref = %select_idea;
+  my $ref = &select_idea;
   $self->stash(ideas => $ref);
   $self->render('index');
 };
