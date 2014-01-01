@@ -1,3 +1,40 @@
-body {
+@font-face {
+	font-family: comfortaa;
+	src: url('images/comfortaa/Comfortaa-Light.ttf');
+}
 
+body {
+	margin: 0px;
+	padding: 0px;
+	background-image: url("images/grid_noise.png");
+	background-repeat: repeat-xy;
+	font-family: comfortaa;
+	color: #6a8f63;
+}
+
+#header{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	background-color: white;
+	box-shadow: 0px 0px 2px black;
+}
+
+#header h1{
+	font-weight: 100;
+	margin: 0px;
+	padding: 10px;
+	margin-left: 50px;
+}
+
+#wrapper{
+	position: relative;
+	width: 1024px;
+	min-height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	background-color: white;
+	box-shadow: 1px 1px 2px -2px black;
+	border-radius: 2px;
 }
