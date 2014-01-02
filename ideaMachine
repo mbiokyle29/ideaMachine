@@ -29,13 +29,45 @@ get '/idea/:id/' => sub
 	my $self = shift;
 	my $id = $self->param('id');
 	my $idea = &select_idea($id);
+	my $comments = &select_comments($id);
 	if($$idea[0])
 	{
 		$self->stash(idea => $idea);
+		$self->stash(comment_ref => $comments);
 		$self->render('idea');
 	}
 	else { $self->render(text => "Sorry page not found"); }
 };
+
+post '/comment' => sub
+{
+	my $self = shift;
+	my $idea_id = $self->param('id');
+	my $comment = $self->param('comment');
+	my $commenter = $self->param('commenter');
+	&insert_comment($idea_id, $comment, $commenter);
+	$self->redirect_to("/idea/$idea_id");
+};
+
+sub select_comments
+{
+	my $idea_id = shift;
+	my $q = "SELECT text, user from comments WHERE idea_id=?";
+	my $sth = $dbh->prepare($q);
+	$sth->execute($idea_id);
+	my $arr_ref = $sth->fetchall_arrayref;
+	return $arr_ref;
+}
+
+sub insert_comment
+{
+	my $idea_id = shift;
+	my $comment = shift;
+	my $commenter = shift;
+	my $q = "INSERT INTO comments (idea_id, text, user) values (?,?,?)";
+	my $sth = $dbh->prepare($q);
+	$sth->execute($idea_id, $comment, $commenter);
+}
 
 sub insert_idea
 {

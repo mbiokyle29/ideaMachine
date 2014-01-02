@@ -45,3 +45,12 @@ body{
 	-webkit-column-count:3;
 	column-count:3;
 }
+
+textarea{
+	width: 50%;
+	min-height: 150px;
+}
+
+input{
+	width: 50%;
+}

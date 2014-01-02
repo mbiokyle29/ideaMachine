@@ -12,14 +12,28 @@
 			<h1>IdeaMachine</h1>
 		</div>
 		<div id="wrapper">
-			 <h1><%= $idea->[1] %></h1>
-			 <hr/><br>
-			 <p>
-			 	<%= $idea->[2] %>
-			 </p>
-			 <p>
-			 	-<%= $idea->[3] %>
-			 </p>
+			<h1><%= $idea->[1] %></h1>
+			<hr/><br>
+			<p>
+				<%= $idea->[2] %>
+			</p>
+			<p>
+				-<%= $idea->[3] %>
+			</p>
+			<h2>Comments</h2>
+			<% for my $row ( @{$comment_ref} ) { %>
+ 				<strong><%= $row->[1] %></strong>		
+ 				<%= $row->[0] %><br>
+ 			<% } %>	
+			<h4>Add a Comment!</h4>
+				%= form_for "/comment" => (method => 'POST') => begin
+				%= text_area 'comment'
+				<br>
+				<p1> Submitter <p1><br>
+				%= text_field 'commenter'
+				%= submit_button
+				<input name="id" type="hidden" value=<%= $idea->[0]%>>
+				% end
  		</div>
 	</body>
 </html>
