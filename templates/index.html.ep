@@ -4,14 +4,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>test</title>
-		<link rel="stylesheet" type="text/css" href="style.css" />
+		<title>Idea Machine</title>
+		<link rel="stylesheet" type="text/css" href="/style/style.css" />
 	</head>
 	<body>
 		<div id="header">
 			<h1>IdeaMachine</h1>
 		</div>
 		<div id="wrapper">
+			<h1>Submit A New Idea</h1>
 			%= form_for '/idea' => (method => 'POST') => begin
 			<p1> Idea Title </p1><br>
 			%= text_field 'title'
@@ -23,12 +24,13 @@
 			%= text_field 'user'
 			%= submit_button
 			% end
-			
 			<h1> Newly Added Ideas </h1>
- 			<% for my $row ( @{$ideas} ) { %>
- 				<li> <%=$row->[0]%> <%=$row->[1]%> <%=$row->[2]%></li>
- 				<br>
- 			<% } %>	
+			<div id="column">
+ 				<% for my $row ( @{$ideas} ) { %>
+ 					<li> <%=$row->[0]%> || By: <%=$row->[2]%> <br> <%=$row->[1]%> </li>
+ 					<br>
+ 				<% } %>	
+ 			</div>
  		</div>
 	</body>
 </html>

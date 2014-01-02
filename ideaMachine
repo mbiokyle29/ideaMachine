@@ -6,14 +6,16 @@ my $pass = "deusXmach";
 
 my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
 
-get '/' => sub {
+get '/' => sub 
+{
 	my $self = shift;
 	my $ref = &select_ideas;
 	$self->stash(ideas => $ref);
 	$self->render('index');
 };
 
-post '/idea' => sub {
+post '/idea' => sub 
+{
 	my $self = shift;
 	my $idea = $self->param('title');
 	my $desc = $self-> param('description');
@@ -22,12 +24,17 @@ post '/idea' => sub {
 	$self->redirect_to("/idea/$id");
 };
 
-get '/idea/:id/' => sub {
+get '/idea/:id/' => sub 
+{
 	my $self = shift;
 	my $id = $self->param('id');
 	my $idea = &select_idea($id);
-	$self->stash(idea => $idea);
-	$self->render('idea');
+	if($$idea[0])
+	{
+		$self->stash(idea => $idea);
+		$self->render('idea');
+	}
+	else { $self->render(text => "Sorry page not found"); }
 };
 
 sub insert_idea
@@ -53,7 +60,7 @@ sub select_ideas
 sub select_idea
 {
 	my $id = shift;
-	my $q = "SELECT title, description, user from ideas WHERE id=?";
+	my $q = "SELECT id, title, description, user from ideas WHERE id=?";
 	my $sth = $dbh->prepare($q);
 	$sth->execute($id);
 	my $arr_ref = $sth->fetchrow_arrayref;
