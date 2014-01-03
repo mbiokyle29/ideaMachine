@@ -54,3 +54,9 @@ textarea{
 input{
 	width: 50%;
 }
+
+a{
+	text-decoration : none; 
+	font-family: comfortaa;
+	color: #6a8f63;
+}

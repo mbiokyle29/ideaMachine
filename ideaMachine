@@ -82,7 +82,7 @@ sub insert_idea
 
 sub select_ideas
 {
-	my $q = "SELECT title, description, user from ideas LIMIT 10";
+	my $q = "SELECT id, title, description, user from ideas LIMIT 10";
 	my $sth = $dbh->prepare($q);
 	$sth->execute();
 	my $arr_ref = $sth->fetchall_arrayref;
