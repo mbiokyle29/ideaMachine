@@ -1,5 +1,5 @@
 $ curl get.mojolicio.us | sh
-sudo apt-get install lib-mojoliciousperl
+$ sudo apt-get install lib-mojoliciousperl
 
 # Mysql set up
 CREATE USER 'ideaMac'@'localhost' IDENTIFIED BY 'deusXmach'
