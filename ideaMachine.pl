@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+push @INC,"/app/lib";
 use Mojolicious::Lite;
 use DBI;
 my $user = "ideaMac";
