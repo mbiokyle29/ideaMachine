@@ -1,2 +1,2 @@
 #!/bin/sh
-./ideaMachine daemon --listen http://*:$PORT --mode production
+./ideaMachine daemon -l http://*:$PORT --m production

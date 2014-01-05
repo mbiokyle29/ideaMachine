@@ -4,7 +4,5 @@ use warnings;
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-  VERSION   => '0.01',
-  PREREQ_PM => {'Mojolicious' => '4.19'},
-  test      => {TESTS => 't/*.t'}
+  PREREQ_PM => {'Mojolicious' => '4.11'},
 );
