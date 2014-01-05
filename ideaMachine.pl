@@ -1,12 +1,6 @@
 #!/usr/bin/env perl
 use Mojolicious::Lite;
 use DBI;
-my $user = "bf391e6568fd14";
-my $pass = "6289e0fc";
-my $host = "us-cdbr-east-04.cleardb.com";
-my $db = "heroku_165a36048510275";
-my $dsn = "DBI:mysql:database=$db;host=$host;";
-my $dbh = DBI->connect_cached($dsn, $user, $pass);
 
 get '/' => sub 
 {
@@ -51,8 +45,20 @@ post '/comment' => sub
 	$self->redirect_to("/idea/$idea_id");
 };
 
+sub connect
+{
+	my $user = "bf391e6568fd14";
+	my $pass = "6289e0fc";
+	my $host = "us-cdbr-east-04.cleardb.com";
+	my $db = "heroku_165a36048510275";
+	my $dsn = "DBI:mysql:database=$db;host=$host;";
+	my $dbh = DBI->connect($dsn, $user, $pass);
+	return $dbh;
+}
+
 sub select_comments
 {
+	my $dbh = &connect();
 	my $idea_id = shift;
 	my $q = "SELECT text, user from comments WHERE idea_id=?";
 	my $sth = $dbh->prepare($q);
@@ -63,6 +69,7 @@ sub select_comments
 
 sub insert_comment
 {
+	my $dbh = &connect();
 	my $idea_id = shift;
 	my $comment = shift;
 	my $commenter = shift;
@@ -73,6 +80,7 @@ sub insert_comment
 
 sub insert_idea
 {
+	my $dbh = &connect();
 	my $title = shift;
 	my $description = shift;
 	my $user = shift;
@@ -84,6 +92,7 @@ sub insert_idea
 
 sub select_ideas
 {
+	my $dbh = &connect();
 	my $q = "SELECT id, title, description, user from ideas LIMIT 10";
 	my $sth = $dbh->prepare($q);
 	$sth->execute();
@@ -93,6 +102,7 @@ sub select_ideas
 
 sub select_idea
 {
+	my $dbh = &connect();
 	my $id = shift;
 	my $q = "SELECT id, title, description, user from ideas WHERE id=?";
 	my $sth = $dbh->prepare($q);
