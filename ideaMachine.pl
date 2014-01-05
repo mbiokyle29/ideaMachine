@@ -6,7 +6,7 @@ my $pass = "6289e0fc";
 my $host = "us-cdbr-east-04.cleardb.com";
 my $db = "heroku_165a36048510275";
 my $dsn = "DBI:mysql:database=$db;host=$host;";
-my $dbh = DBI->connect($dsn, $user, $pass);
+my $dbh = DBI->connect_cached($dsn, $user, $pass);
 
 get '/' => sub 
 {
