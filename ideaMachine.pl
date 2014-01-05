@@ -1,11 +1,12 @@
 #!/usr/bin/env perl
-push @INC,"/app/lib";
 use Mojolicious::Lite;
 use DBI;
-my $user = "ideaMac";
-my $pass = "deusXmach";
-
-my $dbh = DBI->connect("DBI:mysql:Idea", $user, $pass);
+my $user = "bf391e6568fd14";
+my $pass = "6289e0fc";
+my $host = "us-cdbr-east-04.cleardb.com";
+my $db = "heroku_165a36048510275";
+my $dsn = "DBI:mysql:database=$db;host=$host;";
+my $dbh = DBI->connect($dsn, $user, $pass);
 
 get '/' => sub 
 {
