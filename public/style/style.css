@@ -46,6 +46,12 @@ body{
 	column-count:3;
 }
 
+span.keeptogether {
+  display: inline-block; 
+  width: 100%;
+}
+
+
 textarea{
 	width: 50%;
 	min-height: 150px;

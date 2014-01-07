@@ -27,8 +27,10 @@
 			<h1> Newly Added Ideas </h1>
 			<div id="column">
  				<% for my $row ( @{$ideas} ) { %>
- 					<a href=<%="/idea/".$row->[0]; %>><%=$row->[1]%>
- 					<br>By: <%=$row->[3]%></a>
+ 					<span class="keeptogether">
+ 						<a href=<%="/idea/".$row->[0]; %>><%=$row->[1]%>
+ 						<br>By: <%=$row->[3]%></a><br>
+ 					</span>
  				<% } %>	
  			</div>
  		</div>

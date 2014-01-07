@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<div id="header">
-			<h1>IdeaMachine</h1>
+			<h1><%= link_to IdeaMachine => '/'%></h1>
 		</div>
 		<div id="wrapper">
 			<h1><%= $idea->[1] %></h1>
@@ -18,7 +18,7 @@
 				<%= $idea->[2] %>
 			</p>
 			<p>
-				-<%= $idea->[3] %>
+				<%= $idea->[3] %>
 			</p>
 			<h2>Comments</h2>
 			<% for my $row ( @{$comment_ref} ) { %>
@@ -34,6 +34,8 @@
 				%= submit_button
 				<input name="id" type="hidden" value=<%= $idea->[0]%>>
 				% end
+				<br>
+				<h4><%= link_to Home => '/' %></h4>
  		</div>
 	</body>
 </html>
