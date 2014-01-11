@@ -12,40 +12,43 @@
 			<h1><%= link_to IdeaMachine => '/'%></h1>
 		</div>
 		<div id="wrapper">
-			<h1><%= $idea->[1] %></h1>
-			<hr/><br>
-			<p>
-				<%= $idea->[2] %>
-			</p>
-			<p>
-				<%= $idea->[3] %>
-			</p>
-			<h2> Tags </h2><br>
-      <% for my $tag ( @{$tags} ) { %>
- 				<strong>#<%= $tag->[0] %></strong>
- 			<% } %>
-      <h4>Add Tag!</h4>
-				%= form_for "/tag" => (method => 'POST') => begin
-				%= text_field 'tag'
-				%= submit_button
-				<input name="id" type="hidden" value=<%= $idea->[0]%>>
-				% end
-				<br>
-      <h2>Comments</h2>
-			<% for my $row ( @{$comment_ref} ) { %>
- 				<strong><%= $row->[1] %></strong>
- 				<%= $row->[0] %><br>
- 			<% } %>
-			<h4>Add a Comment!</h4>
-				%= form_for "/comment" => (method => 'POST') => begin
-				%= text_area 'comment'
-				<br>
-				<p1> Submitter <p1><br>
-				%= text_field 'commenter'
-				%= submit_button
-				<input name="id" type="hidden" value=<%= $idea->[0]%>>
-				% end
-				<br>
+    <h1><%= $idea->[1] %></h1>
+          <hr/><br>
+			<div id="ideacolumn">
+        <span class="keeptogether">
+          <p>
+            <%= $idea->[2] %>
+          </p>
+          <p>
+            <%= $idea->[3] %>
+          </p>
+          <% for my $tag ( @{$tags} ) { %>
+            <span id="tag">#<%= $tag->[0] %></span>
+          <% } %>
+           <h4>Add Tag!</h4>
+          %= form_for "/tag" => (method => 'POST') => begin
+          %= text_field 'tag'
+          %= submit_button
+          <input name="id" type="hidden" value=<%= $idea->[0]%>>
+          % end
+        </span>
+        <span class="keeptogether">
+          <h4>Comments</h4>
+          <% for my $row ( @{$comment_ref} ) { %>
+            <strong><%= $row->[1] %></strong>
+            <%= $row->[0] %><br>
+          <% } %>
+          <h4>Add a Comment!</h4>
+				  %= form_for "/comment" => (method => 'POST') => begin
+				  %= text_area 'comment'
+				  <br>
+				  <p1> Submitter <p1><br>
+				  %= text_field 'commenter'
+				  %= submit_button
+				  <input name="id" type="hidden" value=<%= $idea->[0]%>>
+				  % end
+       </span>
+       </div>
 				<h4><%= link_to Home => '/' %></h4>
  		</div>
 	</body>

@@ -137,10 +137,10 @@ sub select_tags
 {
   	my $dbh = &connect();
     my $id = shift;
-    my $q = "SELECT tag where idea_id=?";
+    my $q = "SELECT tag from tags where idea_id=?";
     my $sth = $dbh->prepare($q);
     $sth->execute($id);
-    my $arr_ref = $sth->fetchrow_arrayref;
+    my $arr_ref = $sth->fetchall_arrayref;
     return $arr_ref;
 }
 app->start;

@@ -46,23 +46,35 @@ body{
 	column-count:3;
 }
 
+#ideacolumn
+{
+	-moz-column-count:2;
+	-webkit-column-count:2;
+	column-count:2;
+  column-gap:40px;
+}
+
 span.keeptogether {
-  display: inline-block; 
+  display: inline-block;
   width: 100%;
 }
 
 
 textarea{
-	width: 50%;
-	min-height: 150px;
+	width: 40%;
+	min-height: 100px;
 }
 
 input{
-	width: 50%;
+	width: 40%;
 }
 
 a{
-	text-decoration : none; 
+	text-decoration : none;
 	font-family: comfortaa;
 	color: #6a8f63;
+}
+
+#tag{
+  color: #87628e;
 }
