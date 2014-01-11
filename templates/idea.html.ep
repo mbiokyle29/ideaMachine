@@ -20,11 +20,22 @@
 			<p>
 				<%= $idea->[3] %>
 			</p>
-			<h2>Comments</h2>
+			<h2> Tags </h2><br>
+      <% for my $tag ( @{$tags} ) { %>
+ 				<strong>#<%= $tag->[0] %></strong>
+ 			<% } %>
+      <h4>Add Tag!</h4>
+				%= form_for "/tag" => (method => 'POST') => begin
+				%= text_field 'tag'
+				%= submit_button
+				<input name="id" type="hidden" value=<%= $idea->[0]%>>
+				% end
+				<br>
+      <h2>Comments</h2>
 			<% for my $row ( @{$comment_ref} ) { %>
- 				<strong><%= $row->[1] %></strong>		
+ 				<strong><%= $row->[1] %></strong>
  				<%= $row->[0] %><br>
- 			<% } %>	
+ 			<% } %>
 			<h4>Add a Comment!</h4>
 				%= form_for "/comment" => (method => 'POST') => begin
 				%= text_area 'comment'

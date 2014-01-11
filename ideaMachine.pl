@@ -2,7 +2,7 @@
 use Mojolicious::Lite;
 use DBI;
 
-get '/' => sub 
+get '/' => sub
 {
 	my $self = shift;
 	my $ref = &select_ideas;
@@ -10,7 +10,7 @@ get '/' => sub
 	$self->render('index');
 };
 
-post '/idea' => sub 
+post '/idea' => sub
 {
 	my $self = shift;
 	my $idea = $self->param('title');
@@ -20,17 +20,19 @@ post '/idea' => sub
 	$self->redirect_to("/idea/$id");
 };
 
-get '/idea/:id/' => sub 
+get '/idea/:id/' => sub
 {
 	my $self = shift;
 	my $id = $self->param('id');
 	my $idea = &select_idea($id);
 	my $comments = &select_comments($id);
+  my $tags = &select_tags($id);
 	if($$idea[0])
 	{
 		$self->stash(idea => $idea);
 		$self->stash(comment_ref => $comments);
-		$self->render('idea');
+		$self->stash(tags => $tags);
+    $self->render('idea');
 	}
 	else { $self->render(text => "Sorry page not found"); }
 };
@@ -44,6 +46,16 @@ post '/comment' => sub
 	&insert_comment($idea_id, $comment, $commenter);
 	$self->redirect_to("/idea/$idea_id");
 };
+
+post '/tag' => sub
+{
+	my $self = shift;
+	my $idea_id = $self->param('id');
+	my $tag = $self->param('tag');
+  &insert_tag($idea_id, $tag);
+	$self->redirect_to("/idea/$idea_id");
+};
+
 
 sub connect
 {
@@ -90,6 +102,16 @@ sub insert_idea
 	return $dbh->{'mysql_insertid'};
 }
 
+sub insert_tag
+{
+	my $dbh = &connect();
+	my $idea_id = shift;
+	my $tag = shift;
+	my $q = "INSERT INTO tags (idea_id, tag) values (?,?)";
+	my $sth = $dbh->prepare($q);
+	$sth->execute($idea_id, $tag);
+}
+
 sub select_ideas
 {
 	my $dbh = &connect();
@@ -109,5 +131,16 @@ sub select_idea
 	$sth->execute($id);
 	my $arr_ref = $sth->fetchrow_arrayref;
 	return $arr_ref;
+}
+
+sub select_tags
+{
+  	my $dbh = &connect();
+    my $id = shift;
+    my $q = "SELECT tag where idea_id=?";
+    my $sth = $dbh->prepare($q);
+    $sth->execute($id);
+    my $arr_ref = $sth->fetchrow_arrayref;
+    return $arr_ref;
 }
 app->start;

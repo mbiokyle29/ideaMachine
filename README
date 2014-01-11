@@ -24,6 +24,15 @@ CREATE TABLE comments
 	user varchar(250) NOT NULL
 );
 
+#Tags
+CREATE TABLE tags
+{
+  id int auto_increment NOT NULL,
+	primary key(id),
+	idea_id int NOT NULL,
+  tag varchar(250) NOT NULL
+};
+
 GRANT ALL ON Idea.* to 'ideaMac'@'localhost'
 
 cd to the dir with IdeaMachine
