@@ -1,7 +1,13 @@
-$ curl get.mojolicio.us | sh
-$ sudo apt-get install lib-mojoliciousperl
+This repository contains a small perl mojolicous web application to track hackathon ideas.
 
-# Mysql set up
+Installation
+```bash
+curl get.mojolicio.us | sh
+sudo apt-get install lib-mojoliciousperl
+```
+
+Create the mysql database
+```sql
 CREATE USER 'ideaMac'@'localhost' IDENTIFIED BY 'deusXmach'
 CREATE database Idea;
 use Idea;
@@ -34,6 +40,10 @@ CREATE TABLE tags
 };
 
 GRANT ALL ON Idea.* to 'ideaMac'@'localhost'
+```
 
-cd to the dir with IdeaMachine
-$ morbo IdeaMachine
+
+Start the development server
+```bash
+morbo IdeaMachine
+```
